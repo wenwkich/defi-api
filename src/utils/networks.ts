@@ -9,7 +9,7 @@ export const EVM_NETWORKS: { [key in EVM_NETWORK_NAME]: Network } = {
   },
   bsc: {
     rpcUrl: "https://bsc-dataseed.binance.org/",
-    chainId: 97,
+    chainId: 56,
   },
   polygon: {
     rpcUrl: "https://matic-mainnet.chainstacklabs.com",
