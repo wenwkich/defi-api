@@ -1,8 +1,8 @@
 import express from 'express';
-import eth from './eth';
+import native from './native';
 
 const router = express.Router();
 
-router.use('/eth', eth);
+router.use('/native', native);
 
 export default router;

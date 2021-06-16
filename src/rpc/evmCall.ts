@@ -1,6 +1,8 @@
 import { ethers } from 'ethers';
+import Logger from '../core/Logger';
 import { ERC20_ABI, UNISWAP_ABI } from '../utils/abi';
-import { EVM_NETWORKS, EVM_NETWORK_NAME } from '../utils/networks';
+import { EVM_NETWORK_NAME } from '../utils/interface';
+import { EVM_NETWORKS } from '../utils/networks';
 
 export const getRpcProvider = (networkName: EVM_NETWORK_NAME) => {
   const { rpcUrl, chainId } = EVM_NETWORKS[networkName];
@@ -35,10 +37,12 @@ export const getTokenOutAmount = async (networkName: EVM_NETWORK_NAME, targetDex
   const provider = getRpcProvider(networkName);
   const tokenInContract = new ethers.Contract(path[0], ERC20_ABI, provider);
   const tokenOutContract = new ethers.Contract(path[path.length - 1], ERC20_ABI, provider);
-  const tokenInDecimals = await tokenInContract.decimals();
-  const tokenOutDecimals = await tokenOutContract.decimals();
+  const tokenInDecimalsPromise = tokenInContract.decimals();
+  const tokenOutDecimalsPromise = tokenOutContract.decimals();
+  const [tokenInDecimals, tokenOutDecimals] = await Promise.all([tokenInDecimalsPromise, tokenOutDecimalsPromise]);
   const realAmountIn = ethers.utils.parseUnits(amountIn, tokenInDecimals);
   const uniContract = new ethers.Contract(targetDexAddress, UNISWAP_ABI, provider);
-  const amountOutBN = await uniContract.getAmountsOut(realAmountIn, path);
-  return ethers.utils.formatUnits(amountOutBN, tokenOutDecimals);
+  Logger.debug(tokenOutDecimals);
+  const amountOuts = await uniContract.getAmountsOut(realAmountIn, path);
+  return ethers.utils.formatUnits(amountOuts[path.length - 1], tokenOutDecimals);
 }

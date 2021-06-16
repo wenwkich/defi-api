@@ -1,17 +1,6 @@
 import { ETHEREUM_RPC } from "../config";
+import { EVM_NETWORK_NAME, Network } from "./interface";
 
-export interface Network {
-  rpcUrl: string,
-  chainId: number,
-}
-
-export enum EVM_NETWORK_NAME {
-  ETHEREUM = "ethereum",
-  BSC = "bsc",
-  POLYGON = "polygon",
-  FANTOM = "fantom",
-  XDAI = "xdai",
-}
 
 export const EVM_NETWORKS: { [key in EVM_NETWORK_NAME]: Network } = {
   ethereum: {
