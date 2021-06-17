@@ -1,7 +1,7 @@
 import { BadRequestError, ContractCallError } from "../core/ApiError";
 import { SuccessResponse } from "../core/ApiResponse";
 import Logger from "../core/Logger";
-import { getNativeTokenBalance, getTokenBalance, getTokenOutAmount } from "../rpc/evmCall";
+import { getNativeTokenBalance, getTokenBalance, getTokenOutAmount, queryEthContract } from "../rpc/evmCall";
 import { EVM_NETWORK_NAME } from "../utils/interface";
 import asyncHandler from "./asyncHandler";
 
@@ -79,4 +79,16 @@ export const tokenPriceHandler = (networkName: EVM_NETWORK_NAME, defaultVsAddr: 
       Logger.error(err.reason);
       throw new ContractCallError(msg != null ? msg : "Contract Call Error");
     }
+  })
+
+export const contractCallHandler = (networkName: EVM_NETWORK_NAME) => 
+  asyncHandler(async (req, res) => {
+    const contractAddr = req.params.contractAddr;
+    if (contractAddr === undefined) {
+      throw new BadRequestError("No contract address input");
+    }
+
+    const { abi, methodName, args } = req.body;
+    const data = await queryEthContract(networkName, contractAddr, abi, methodName, args);
+    new SuccessResponse("Successfully queried data", data).send(res);
   })

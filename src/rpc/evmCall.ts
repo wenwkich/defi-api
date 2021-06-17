@@ -45,3 +45,13 @@ export const getTokenOutAmount = async (networkName: EVM_NETWORK_NAME, targetDex
   const amountOuts = await uniContract.getAmountsOut(realAmountIn, path);
   return tokenOutDecimals != 0 ? ethers.utils.formatUnits(amountOuts[path.length - 1], tokenOutDecimals) : amountOuts[path.length - 1];
 }
+
+// used for getting token infomation
+export const getTokenInfo = async (networkName: EVM_NETWORK_NAME, tokenAddr: string) => {
+  const provider = getRpcProvider(networkName);
+  const tokenContract = new ethers.Contract(tokenAddr, ERC20_ABI, provider);
+  const tokenDecimalPromise = tokenContract.decimals();
+  const tokenSymbolPromise = tokenContract.symbol();
+  const [decimals, symbol] = await Promise.all([tokenDecimalPromise, tokenSymbolPromise]);
+  return  { decimals, symbol };
+}

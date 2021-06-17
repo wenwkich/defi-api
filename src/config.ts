@@ -1,12 +1,10 @@
-import e from "express";
-
 // Mapper for environment variables
 export const environment = process.env.NODE_ENV;
 
 if (environment === "development") {
   require('dotenv').config({ path: '.env.development' })
 } else {
-  require('dotenv').config()
+  // require('dotenv').config()
 }
 export const port = process.env.PORT;
 

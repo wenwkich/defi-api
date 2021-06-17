@@ -1,9 +1,7 @@
 import express from 'express';
-import { BadRequestError } from '../../core/ApiError';
 import { SuccessResponse } from '../../core/ApiResponse';
 import asyncHandler from '../../helpers/asyncHandler';
 import { nativeTokenBalanceHandler, nativeTokenPriceHandler } from '../../helpers/handlers';
-import { getNativeTokenBalance, getTokenOutAmount } from '../../rpc/evmCall';
 import { NETWORK_NAME, DEXES, TOKENS } from './common';
 
 const router = express.Router();
@@ -13,7 +11,9 @@ router.get('/balance',
 );
 
 router.get('/price',
-  nativeTokenPriceHandler(NETWORK_NAME, DEXES.QUICKSWAP_ROUTER_V2, "1.0", [TOKENS.WMATIC, TOKENS.USDC]),
+  asyncHandler(async (req, res) => {
+    new SuccessResponse("Successfully queried price", "1.0").send(res);
+  })
 );
 
 export default router;

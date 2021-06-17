@@ -12,14 +12,3 @@ export const TOKENS = {
 export const DEXES = {
   SPOOKYSWAP_ROUTER_V2: "0xF491e7B69E4244ad4002BC14e878a34207E38c29",
 }
-
-export const STAKES = {
-
-}
-
-export const LP_TOKENS: {[key: string]: {address: string, underlying: string[]}} = {
-  LINK_WFTM_SUSHI_LP: {
-    address: "",
-    underlying: ["LINK", "WFTM"],
-  }
-}

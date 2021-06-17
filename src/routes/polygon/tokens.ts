@@ -12,6 +12,4 @@ router.get('/:tokenAddr/price',
   tokenPriceHandler(NETWORK_NAME, TOKENS.WMATIC, DEXES.QUICKSWAP_ROUTER_V2)
 );
 
-// router.get('/:tokenAddr/lp-underlying',
-
 export default router;

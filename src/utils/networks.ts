@@ -1,7 +1,7 @@
 import { ETHEREUM_RPC } from "../config";
 import { EVM_NETWORK_NAME, Network } from "./interface";
 
-
+// TODO make it customized in evm network
 export const EVM_NETWORKS: { [key in EVM_NETWORK_NAME]: Network } = {
   ethereum: {
     rpcUrl: ETHEREUM_RPC,

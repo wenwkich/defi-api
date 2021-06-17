@@ -9,7 +9,7 @@ router.get('/:tokenAddr/balance',
 );
 
 router.get('/:tokenAddr/price',
-  tokenPriceHandler(NETWORK_NAME, TOKENS.WETH, DEXES.UNISWAP_ROUTER_V2)
+  tokenPriceHandler(NETWORK_NAME, TOKENS.WXDAI, DEXES.HONEYSWAP_ROUTER_V2)
 );
 
 export default router;
