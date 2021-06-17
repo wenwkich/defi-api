@@ -1,7 +1,7 @@
 import { BadRequestError, ContractCallError } from "../core/ApiError";
 import { SuccessResponse } from "../core/ApiResponse";
 import Logger from "../core/Logger";
-import { getNativeTokenBalance, getTokenOutAmount } from "../rpc/evmCall";
+import { getNativeTokenBalance, getTokenBalance, getTokenOutAmount } from "../rpc/evmCall";
 import { EVM_NETWORK_NAME } from "../utils/interface";
 import asyncHandler from "./asyncHandler";
 
@@ -25,6 +25,54 @@ export const nativeTokenPriceHandler = (networkName: EVM_NETWORK_NAME, dexAddres
   asyncHandler(async (req, res) => {
     try {
       const price = await getTokenOutAmount(networkName, dexAddress, inputAmount, path);
+      new SuccessResponse("Successfully queried price", price).send(res);
+    } catch (err) {
+      const msg = err.reason;
+      Logger.error(err.reason);
+      throw new ContractCallError(msg != null ? msg : "Contract Call Error");
+    }
+  })
+
+export const tokenBalanceHandler = (networkName: EVM_NETWORK_NAME) =>
+  asyncHandler(async (req, res) => {
+    const addr = req.query.address as string | undefined;
+    if (addr === undefined) {
+      throw new BadRequestError("No address input");
+    }
+    const tokenAddr = req.params.tokenAddr;
+    if (tokenAddr === undefined) {
+      throw new BadRequestError("No token id input");
+    }
+
+    try {
+      const balance = await getTokenBalance(networkName, tokenAddr, addr);
+      new SuccessResponse("Successfully queried balance", balance).send(res);
+    } catch (err) {
+      const msg = err.reason;
+      Logger.error(err.reason);
+      throw new ContractCallError(msg != null ? msg : "Contract Call Error");
+    }
+  })
+
+export const tokenPriceHandler = (networkName: EVM_NETWORK_NAME, defaultVsAddr: string, defaultRouterAddr: string) =>
+  asyncHandler(async (req, res) => {
+    const tokenAddr = req.params.tokenAddr;
+    if (tokenAddr === undefined) {
+      throw new BadRequestError("No token id input");
+    }
+
+    let vsAddr = req.query.vsAddr as string | undefined;
+    if (vsAddr === undefined) {
+      vsAddr = defaultVsAddr;
+    }
+
+    let dexAddr = req.query.dexAddr as string | undefined;
+    if (dexAddr === undefined) {
+      dexAddr = defaultRouterAddr;
+    }
+
+    try {
+      const price = await getTokenOutAmount(networkName, dexAddr, "1.0", [tokenAddr, vsAddr]);
       new SuccessResponse("Successfully queried price", price).send(res);
     } catch (err) {
       const msg = err.reason;

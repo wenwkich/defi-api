@@ -9,7 +9,7 @@ router.get('/:tokenAddr/balance',
 );
 
 router.get('/:tokenAddr/price',
-  tokenPriceHandler(NETWORK_NAME, TOKENS.WFTM, DEXES.SPOOKYSWAP_ROUTER_V2)
+  tokenPriceHandler(NETWORK_NAME, TOKENS.WBNB, DEXES.PANCAKESWAP_ROUTER_V1)
 );
 
 // router.get('/:tokenAddr/lp-underlying',
