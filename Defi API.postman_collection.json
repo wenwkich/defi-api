@@ -1,0 +1,339 @@
+{
+	"info": {
+		"_postman_id": "9ccaf718-a4ad-45fc-aa09-fcc37b06d659",
+		"name": "Defi API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Native Balance",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{url}}/api/bsc/native/balance?address={{address}}",
+					"protocol": "http",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"bsc",
+						"native",
+						"balance"
+					],
+					"query": [
+						{
+							"key": "address",
+							"value": "{{address}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Native Price",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{url}}/api/bsc/native/price",
+					"protocol": "http",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"bsc",
+						"native",
+						"price"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Token Price",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{url}}/api/fantom/tokens/0x09e145A1D53c0045F41aEEf25D8ff982ae74dD56/price?vsAddr=0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83&dexAddr=0xF491e7B69E4244ad4002BC14e878a34207E38c29",
+					"protocol": "http",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"fantom",
+						"tokens",
+						"0x09e145A1D53c0045F41aEEf25D8ff982ae74dD56",
+						"price"
+					],
+					"query": [
+						{
+							"key": "vsAddr",
+							"value": "0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83"
+						},
+						{
+							"key": "dexAddr",
+							"value": "0xF491e7B69E4244ad4002BC14e878a34207E38c29"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Token Balance",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{url}}/api/fantom/tokens/0x09e145A1D53c0045F41aEEf25D8ff982ae74dD56/balance?address={{address}}",
+					"protocol": "http",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"fantom",
+						"tokens",
+						"0x09e145A1D53c0045F41aEEf25D8ff982ae74dD56",
+						"balance"
+					],
+					"query": [
+						{
+							"key": "address",
+							"value": "{{address}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sushi Chef Query Pool Length",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"abi\": [\n        \"function poolLength() public view returns(uint)\"\n    ],\n    \"methodName\": \"poolLength\",\n    \"args\": []\n}"
+				},
+				"url": {
+					"raw": "http://{{url}}/api/fantom/contracts/0x742474dAE70Fa2AB063aB786b1fBe5704e861a0c/call",
+					"protocol": "http",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"fantom",
+						"contracts",
+						"0x742474dAE70Fa2AB063aB786b1fBe5704e861a0c",
+						"call"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sushi Chef Query User Info",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"abi\": [\n        \"function userInfo(uint,address) public view returns(uint)\"\n    ],\n    \"methodName\": \"userInfo\",\n    \"args\": [\n        2, \"{{address}}\"\n    ]\n}"
+				},
+				"url": {
+					"raw": "http://{{url}}/api/fantom/contracts/0x742474dAE70Fa2AB063aB786b1fBe5704e861a0c/call",
+					"protocol": "http",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"fantom",
+						"contracts",
+						"0x742474dAE70Fa2AB063aB786b1fBe5704e861a0c",
+						"call"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sushi Chef Query Pool Info",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"abi\": [\n        \"function poolInfo(uint) public view returns(address)\"\n    ],\n    \"methodName\": \"poolInfo\",\n    \"args\": [2]\n}"
+				},
+				"url": {
+					"raw": "http://{{url}}/api/fantom/contracts/0x742474dAE70Fa2AB063aB786b1fBe5704e861a0c/call",
+					"protocol": "http",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"fantom",
+						"contracts",
+						"0x742474dAE70Fa2AB063aB786b1fBe5704e861a0c",
+						"call"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sushi LP Query Token0",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"abi\": [\n        \"function token0() public view returns(address)\"\n    ],\n    \"methodName\": \"token0\",\n    \"args\": []\n}"
+				},
+				"url": {
+					"raw": "http://{{url}}/api/fantom/contracts/0x1Ca86e57103564F47fFCea7259a6ce8Cc1301549/call",
+					"protocol": "http",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"fantom",
+						"contracts",
+						"0x1Ca86e57103564F47fFCea7259a6ce8Cc1301549",
+						"call"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sushi LP Query Get Reserves",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"abi\": [\n        \"function token0() public view returns(address)\"\n    ],\n    \"methodName\": \"token0\",\n    \"args\": []\n}"
+				},
+				"url": {
+					"raw": "http://{{url}}/api/fantom/contracts/0x1Ca86e57103564F47fFCea7259a6ce8Cc1301549/call",
+					"protocol": "http",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"fantom",
+						"contracts",
+						"0x1Ca86e57103564F47fFCea7259a6ce8Cc1301549",
+						"call"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sushi LP Query Get Total Supply",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"abi\": [\n        \"function totalSupply() public view returns(uint256)\"\n    ],\n    \"methodName\": \"totalSupply\",\n    \"args\": []\n}"
+				},
+				"url": {
+					"raw": "http://{{url}}/api/fantom/contracts/0x1Ca86e57103564F47fFCea7259a6ce8Cc1301549/call",
+					"protocol": "http",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"fantom",
+						"contracts",
+						"0x1Ca86e57103564F47fFCea7259a6ce8Cc1301549",
+						"call"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": ""
+		},
+		{
+			"key": "address",
+			"value": ""
+		}
+	]
+}
