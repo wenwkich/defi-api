@@ -40,9 +40,8 @@ export const getTokenOutAmount = async (networkName: EVM_NETWORK_NAME, targetDex
   const tokenInDecimalsPromise = tokenInContract.decimals();
   const tokenOutDecimalsPromise = tokenOutContract.decimals();
   const [tokenInDecimals, tokenOutDecimals] = await Promise.all([tokenInDecimalsPromise, tokenOutDecimalsPromise]);
-  const realAmountIn = ethers.utils.parseUnits(amountIn, tokenInDecimals);
+  const realAmountIn = tokenInDecimals != 0 ? ethers.utils.parseUnits(amountIn, tokenInDecimals) : Math.floor(+amountIn);
   const uniContract = new ethers.Contract(targetDexAddress, UNISWAP_ABI, provider);
-  Logger.debug(tokenOutDecimals);
   const amountOuts = await uniContract.getAmountsOut(realAmountIn, path);
-  return ethers.utils.formatUnits(amountOuts[path.length - 1], tokenOutDecimals);
+  return tokenOutDecimals != 0 ? ethers.utils.formatUnits(amountOuts[path.length - 1], tokenOutDecimals) : amountOuts[path.length - 1];
 }

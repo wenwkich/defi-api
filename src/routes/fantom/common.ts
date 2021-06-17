@@ -13,5 +13,5 @@ export const CONTRACTS = {
 }
 
 export const STAKES = {
-  
+
 }
