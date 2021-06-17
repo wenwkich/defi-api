@@ -6,6 +6,7 @@ enum StatusCode {
   FAILURE = '10001',
   RETRY = '10002',
   INVALID_ACCESS_TOKEN = '10003',
+  CONTRACT_ERR = '10004',
 }
 
 enum ResponseStatus {
@@ -76,6 +77,12 @@ export class BadRequestResponse extends ApiResponse {
 export class InternalErrorResponse extends ApiResponse {
   constructor(message = 'Internal Error') {
     super(StatusCode.FAILURE, ResponseStatus.INTERNAL_ERROR, message);
+  }
+}
+
+export class ContractErrorResponse extends ApiResponse {
+  constructor(message = 'Contract Call Error') {
+    super(StatusCode.CONTRACT_ERR, ResponseStatus.INTERNAL_ERROR, message);
   }
 }
 

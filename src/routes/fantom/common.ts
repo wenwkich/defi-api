@@ -16,3 +16,10 @@ export const DEXES = {
 export const STAKES = {
 
 }
+
+export const LP_TOKENS: {[key: string]: {address: string, underlying: string[]}} = {
+  LINK_WFTM_SUSHI_LP: {
+    address: "",
+    underlying: ["LINK", "WFTM"],
+  }
+}

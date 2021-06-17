@@ -7,6 +7,7 @@ import {
   NotFoundResponse,
   BadRequestResponse,
   ForbiddenResponse,
+  ContractErrorResponse,
 } from './ApiResponse';
 
 enum ErrorType {
@@ -20,6 +21,7 @@ enum ErrorType {
   NO_DATA = 'NoDataError',
   BAD_REQUEST = 'BadRequestError',
   FORBIDDEN = 'ForbiddenError',
+  CONTRACT_CALL = 'ContractCallError',
 }
 
 export abstract class ApiError extends Error {
@@ -45,6 +47,8 @@ export abstract class ApiError extends Error {
         return new BadRequestResponse(err.message).send(res);
       case ErrorType.FORBIDDEN:
         return new ForbiddenResponse(err.message).send(res);
+      case ErrorType.CONTRACT_CALL:
+        return new ContractErrorResponse(err.message).send(res);
       default: {
         let message = err.message;
         // Do not send failure message in production as it may send sensitive data
@@ -112,5 +116,11 @@ export class NoDataError extends ApiError {
 export class AccessTokenError extends ApiError {
   constructor(message = 'Invalid access token') {
     super(ErrorType.ACCESS_TOKEN, message);
+  }
+}
+
+export class ContractCallError extends ApiError {
+  constructor(message = 'Invalid access token') {
+    super(ErrorType.CONTRACT_CALL, message);
   }
 }
