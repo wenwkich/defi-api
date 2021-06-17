@@ -3,7 +3,7 @@ import { BadRequestError } from '../../core/ApiError';
 import { SuccessResponse } from '../../core/ApiResponse';
 import asyncHandler from '../../helpers/asyncHandler';
 import { getNativeTokenBalance, getTokenOutAmount } from '../../rpc/evmCall';
-import { NETWORK_NAME, CONTRACTS, TOKENS } from './common';
+import { NETWORK_NAME, DEXES, TOKENS } from './common';
 
 const router = express.Router();
 
@@ -20,7 +20,7 @@ router.get('/balance',
 
 router.get('/price',
   asyncHandler(async (req, res) => {
-    const price = await getTokenOutAmount(NETWORK_NAME, CONTRACTS.UNISWAP_ROUTER_V2, "1.0", [TOKENS.WETH, TOKENS.DAI]);
+    const price = await getTokenOutAmount(NETWORK_NAME, DEXES.UNISWAP_ROUTER_V2, "1.0", [TOKENS.WETH, TOKENS.DAI]);
     new SuccessResponse("Successfully queried price", price).send(res);
   })
 );

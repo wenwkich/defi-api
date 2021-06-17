@@ -7,6 +7,6 @@ export const TOKENS = {
   BUSD: "0xe9e7cea3dedca5984780bafc599bd69add087d56",
 };
 
-export const CONTRACTS = {
+export const DEXES = {
   PANCAKESWAP_ROUTER_V1: "0x05fF2B0DB69458A0750badebc4f9e13aDd608C7F",
 }

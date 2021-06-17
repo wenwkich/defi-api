@@ -7,6 +7,6 @@ export const TOKENS = {
   DAI: "0x6b175474e89094c44da98b954eedeac495271d0f",
 };
 
-export const CONTRACTS = {
+export const DEXES = {
   UNISWAP_ROUTER_V2: "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
 }

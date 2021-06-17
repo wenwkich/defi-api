@@ -3,7 +3,7 @@ import { BadRequestError } from '../../core/ApiError';
 import { SuccessResponse } from '../../core/ApiResponse';
 import asyncHandler from '../../helpers/asyncHandler';
 import { getTokenBalance, getTokenOutAmount } from '../../rpc/evmCall';
-import { NETWORK_NAME, CONTRACTS, TOKENS } from './common';
+import { NETWORK_NAME, DEXES, TOKENS } from './common';
 
 const router = express.Router();
 
@@ -54,7 +54,7 @@ router.get('/:tokenId/price',
       vsAddr = TOKENS.WFTM;
     }
 
-    const price = await getTokenOutAmount(NETWORK_NAME, CONTRACTS.SPOOKYSWAP_ROUTER_V2, "1.0", [tokenAddr, vsAddr]);
+    const price = await getTokenOutAmount(NETWORK_NAME, DEXES.SPOOKYSWAP_ROUTER_V2, "1.0", [tokenAddr, vsAddr]);
     new SuccessResponse("Successfully queried price", price).send(res);
   })
 );

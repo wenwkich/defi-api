@@ -7,6 +7,6 @@ export const TOKENS = {
   USDC: "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
 };
 
-export const CONTRACTS = {
+export const DEXES = {
   QUICKSWAP_ROUTER_V2: "0xa5E0829CaCEd8fFDD4De3c43696c57F7D7A678ff",
 }
